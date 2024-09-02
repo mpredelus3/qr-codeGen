@@ -107,6 +107,7 @@ img {
   list-style-type: none;
   padding: 0;
   margin-top: 2rem;
+  overflow: visible;
 }
 
 .qr-item {
@@ -115,6 +116,8 @@ img {
   background-color: #333;
   border-radius: 0.5rem;
   color: #ffffff;
+  overflow: visible;
+  word-wrap: break-word;
 }
 
 .qr-item strong {

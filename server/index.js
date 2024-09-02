@@ -92,12 +92,15 @@ app.get('/api/get-qr-codes', async (req, res) => {
     try {
         const pool = await mssql.connect(dbConfig);
         const result = await pool.request().query('SELECT * FROM dbo.QRCodes');
+        
+        console.log(result.recordset); // Log the result to check the data
         res.json(result.recordset);
     } catch (error) {
         console.error('Error retrieving QR Codes:', error);
         res.status(500).json({ message: 'Error retrieving QR Codes.' });
     }
 });
+
 
 const server = http.createServer(app);
 server.listen(PORT, '0.0.0.0', () => {

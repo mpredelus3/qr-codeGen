@@ -10,6 +10,7 @@ function ViewQRCodes() {
     const fetchQRCodes = async () => {
       try {
         const response = await axios.get("http://localhost:5001/api/get-qr-codes");
+        console.log(response.data); // Log to check the received data
         setQRCodes(response.data);
       } catch (err) {
         console.error("Error fetching QR Codes:", err);
@@ -37,7 +38,6 @@ function ViewQRCodes() {
   );
 }
 
-// Inline style for the Back button to match the theme
 const backButtonStyle = {
   backgroundColor: 'transparent',
   border: 'none',
