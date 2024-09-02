@@ -1,23 +1,21 @@
-USE QRDatabase;
+CREATE DATABASE IF NOT EXISTS QRDatabase;
 
--- Create the QRCodes table
-CREATE TABLE IF NOT EXISTS dbo.QRCodes (
-    QRId NVARCHAR(100) PRIMARY KEY,
-    RedirectURL NVARCHAR(2048) NOT NULL,
-    SquareColor NVARCHAR(7) NOT NULL,
-    EyeColor NVARCHAR(7) NOT NULL,
-    QRDataURL NVARCHAR(MAX) NOT NULL,
-    CreatedAt DATETIME DEFAULT GETDATE()
+USE Q-- For QRCodes Table
+CREATE TABLE dbo.QRCodes (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    QRCodeid NVARCHAR(255) NOT NULL,
+    RedirectUrl NVARCHAR(MAX) NOT NULL,
+    SquareColor NVARCHAR(50) NULL,
+    Eyecolor NVARCHAR(50) NULL
 );
 
--- Create the QRScans table
-CREATE TABLE IF NOT EXISTS dbo.QRScans (
-    LogId INT PRIMARY KEY IDENTITY(1,1),
-    QRId NVARCHAR(100) NOT NULL,
-    ScanDateTime DATETIME DEFAULT GETDATE(),
-    DeviceInfo NVARCHAR(512),
-    Country NVARCHAR(100),
-    City NVARCHAR(100),
-    ScannerIdentifier NVARCHAR(100),
-    FOREIGN KEY (QRId) REFERENCES dbo.QRCodes(QRId)
+-- For QRScans Table
+CREATE TABLE dbo.QRScans (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    QRCodeid NVARCHAR(255) NOT NULL,
+    ScanDateTime DATETIME NOT NULL,
+    DeviceDetails NVARCHAR(MAX) NULL,
+    Country NVARCHAR(100) NULL,
+    City NVARCHAR(100) NULL,
+    MacAddress NVARCHAR(50) NULL
 );
