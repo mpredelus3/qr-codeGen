@@ -1,6 +1,7 @@
 import QRCode from "qrcode";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom"; // Import Link for navigation
 
 function CreateQRCode() {
   const [url, setUrl] = useState("");
@@ -31,7 +32,7 @@ function CreateQRCode() {
         qrDataURL 
       }));
 
-      // Optionally, send the QR code details to the backend
+      // Send the QR code details to the backend
       await axios.post("http://localhost:5001/api/create-qr", {
         qrId,
         redirectURL: url,
@@ -77,6 +78,10 @@ function CreateQRCode() {
           <a href={qrcode} download="qrcode.png">Download</a>
         </>
       )}
+      {/* Button to navigate to the View QR Codes page */}
+      <Link to="/view-qrcodes">
+        <button>View QR Codes</button>
+      </Link>
     </div>
   );
 }
