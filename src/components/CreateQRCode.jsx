@@ -1,7 +1,7 @@
 import QRCode from "qrcode";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link } from "react-router-dom";
 
 function CreateQRCode() {
   const [url, setUrl] = useState("");
@@ -12,18 +12,16 @@ function CreateQRCode() {
 
   const GenerateQRCode = async () => {
     try {
-      // Generate the QR code locally to display on the frontend
       const qrDataURL = await QRCode.toDataURL(url, {
         width: 800,
         margin: 2,
         color: {
           dark: squareColor,
-          light: "#FFFFFF", // Background color (typically white)
+          light: "#FFFFFF",
         },
       });
       setQrcode(qrDataURL);
 
-      // Save the QR code data to local storage
       localStorage.setItem('qrCodeData', JSON.stringify({ 
         qrId, 
         redirectURL: url, 
@@ -32,7 +30,6 @@ function CreateQRCode() {
         qrDataURL 
       }));
 
-      // Send the QR code details to the backend
       await axios.post("http://localhost:5001/api/create-qr", {
         qrId,
         redirectURL: url,
@@ -49,39 +46,68 @@ function CreateQRCode() {
   return (
     <div className="app">
       <h1>QR Code Generator</h1>
-      <input
-        type="text"
-        placeholder="Enter QR ID"
-        value={qrId}
-        onChange={(e) => setQrId(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="e.g https://google.com"
-        value={url}
-        onChange={(evt) => setUrl(evt.target.value)}
-      />
-      <input
-        type="color"
-        value={squareColor}
-        onChange={(e) => setSquareColor(e.target.value)}
-      />
-      <input
-        type="color"
-        value={eyeColor}
-        onChange={(e) => setEyeColor(e.target.value)}
-      />
-      <button onClick={GenerateQRCode}>Generate</button>
+      
+      <div className="input-group">
+        <input
+          type="text"
+          placeholder="Enter QR ID"
+          value={qrId}
+          onChange={(e) => setQrId(e.target.value)}
+        />
+      </div>
+
+      <div className="input-group">
+        <input
+          type="text"
+          placeholder="e.g https://google.com"
+          value={url}
+          onChange={(evt) => setUrl(evt.target.value)}
+        />
+      </div>
+      
+      <div className="color-group">
+        <div className="color-picker">
+          <label htmlFor="squareColor">Square Color:</label>
+          <input
+            id="squareColor"
+            type="color"
+            value={squareColor}
+            onChange={(e) => setSquareColor(e.target.value)}
+          />
+        </div>
+
+        <div className="color-picker">
+          <label htmlFor="eyeColor">Eye Color:</label>
+          <input
+            id="eyeColor"
+            type="color"
+            value={eyeColor}
+            onChange={(e) => setEyeColor(e.target.value)}
+          />
+        </div>
+      </div>
+
+      <div className="button-group">
+        <div className="button-box">
+          <button onClick={GenerateQRCode}>Generate</button>
+        </div>
+        <div className="button-box">
+          <Link to="/view-qrcodes">
+            <button>View QR Codes</button>
+          </Link>
+        </div>
+      </div>
+
       {qrcode && (
-        <>
+        <div className="qrcode-display">
           <img src={qrcode} alt="Generated QR Code" />
-          <a href={qrcode} download="qrcode.png">Download</a>
-        </>
+          <div className="button-box">
+            <a href={qrcode} download="qrcode.png">
+              <button>Download</button>
+            </a>
+          </div>
+        </div>
       )}
-      {/* Button to navigate to the View QR Codes page */}
-      <Link to="/view-qrcodes">
-        <button>View QR Codes</button>
-      </Link>
     </div>
   );
 }

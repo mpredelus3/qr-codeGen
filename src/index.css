@@ -13,56 +13,87 @@ body {
 
 .app {
   padding: 2rem 1rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-nav {
-  margin-bottom: 2rem;
-}
-
-nav a {
-  margin: 0 1rem;
-  color: #2bcb4b;
-  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #2bcb4b;
 }
 
-input {
+.input-group {
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+input[type="text"] {
   appearance: none;
   outline: none;
   border: none;
   background: #EEE;
   width: 100%;
-  max-width: 300px;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  margin-right: 1rem;
 }
 
-button, a {
+.color-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.color-picker {
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-picker label {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+input[type="color"] {
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.button-box {
+  background-color: #333;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+button {
   appearance: none;
   outline: none;
   border: none;
-  background: #2bcb4b;
-  color: #1b2034;
+  background: none;
+  color: #2bcb4b;
   font-size: 1.5rem;
-  line-height: 1;
-  text-decoration: none;
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  margin: 1rem 0;
-  transition: background-color 0.3s ease;
 }
 
-button:hover, a:hover {
-  background-color: #249c3b;
+a {
+  text-decoration: none;
+}
+
+.qrcode-display {
+  margin-top: 2rem;
 }
 
 img {
@@ -70,6 +101,23 @@ img {
   width: 100%;
   max-width: 480px;
   margin: 2rem auto;
-  border: 5px solid #2bcb4b;
-  border-radius: 10px;
+}
+
+.qr-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.qr-item {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #333;
+  border-radius: 0.5rem;
+  color: #ffffff;
+}
+
+.qr-item strong {
+  color: #2bcb4b;
+  font-weight: bold;
 }
