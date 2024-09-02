@@ -22,7 +22,16 @@ function CreateQRCode() {
       });
       setQrcode(qrDataURL);
 
-      // Send the QR code details to the backend
+      // Save the QR code data to local storage
+      localStorage.setItem('qrCodeData', JSON.stringify({ 
+        qrId, 
+        redirectURL: url, 
+        squareColor, 
+        eyeColor, 
+        qrDataURL 
+      }));
+
+      // Optionally, send the QR code details to the backend
       await axios.post("http://localhost:5001/api/create-qr", {
         qrId,
         redirectURL: url,
