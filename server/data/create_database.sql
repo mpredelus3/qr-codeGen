@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS QRDatabase;
 
-USE Q-- For QRCodes Table
+USE QRDatabase -- For QRCodes Table
+
 CREATE TABLE dbo.QRCodes (
     id INT PRIMARY KEY IDENTITY(1,1),
     QRCodeid NVARCHAR(255) NOT NULL,
